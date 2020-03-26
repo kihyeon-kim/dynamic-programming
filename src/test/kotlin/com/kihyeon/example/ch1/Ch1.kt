@@ -89,11 +89,46 @@ internal class Ch1 {
             return result.requireNoNulls()
         }
 
-        // fun accRec(inputArr: Array<Int>): Array<Int> {
-        //     result[index] = inputArr[index] + inputArr[index - 1]
-        // }
+        //        fun accRec(inputArr: Array<Int>): Array<Int> {
+        //            //            result[index] = inputArr[index] + inputArr[index - 1]
+        //
+        //            val size = inputArr.size
+        //            if (size == 1) {
+        //
+        //            }
+        //            val result = arrayOfNulls<Int>(1)
+        //            return result.plus(accRec(inputArr.sliceArray((0 until size)))).requireNoNulls()
+        //        }
 
         println(accNormal(arrayOf(1, 2, 3, 4, 5, 6)).joinToString(","))
     }
 
+    @Test // 점화식이란: http://www.ktword.co.kr/word/abbr_view.php?m_temp1=6008
+    fun `1-5`() {
+        fun power(x: Int, n: Int): Int {
+            return when {
+                n == 0 -> 1
+                x == 1 -> x
+                else -> x * power(x, n - 1)
+            }
+        }
+
+        println(power(2, 4))
+    }
+
+    @Test // 하노이
+    fun `1-6`() {
+        fun towerOfHanoi(s: Char, d: Char, e: Char, n: Int) {
+            // 종료조건
+            if (n <= 0) {
+                return
+            }
+
+            towerOfHanoi(s, e, d, n - 1)
+            println("$n 번 원반을 $s 에서 $d 로 옮깁니다")
+            towerOfHanoi(e, d, s, n - 1)
+        }
+
+        println(towerOfHanoi('s', 'd', 'e', 3))
+    }
 }
