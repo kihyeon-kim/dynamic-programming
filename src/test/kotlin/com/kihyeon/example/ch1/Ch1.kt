@@ -235,4 +235,57 @@ internal class Ch1 {
         bubbleSort(arr, 8)
         println(arr.joinToString())
     }
+
+    // 함수가 수행해야 하는 작업: 1회 탐색을 통해 가장 큰 원소를 제일 뒤로 보내기
+    // 큰 문제를 같은 유형의 작은 문제로 정의하기: n개 원소의 정렬 = 1회의 탐색 + n - 1개 원소의 정렬
+    // 종료조건: 탐색 대상의 배열의 크기가 1 이하일 때 종료
+
+    @Test
+    fun `1-11`() {
+        fun bubbleSort(arr: Array<Int?>, n: Int) {
+            if (n < 1) {
+                return
+            }
+
+            for (j in 0 until n - 1) {
+                if (arr[j]!! > arr[j + 1]!!) {
+                    // swap
+                    val temp = arr[j]
+                    arr[j] = arr[j + 1]
+                    arr[j + 1] = temp
+                }
+            }
+
+            bubbleSort(arr, n - 1)
+        }
+
+        val arr: Array<Int?> = arrayOf(9, 6, 2, 12, 11, 9, 3, 7)
+        bubbleSort(arr, 8)
+        println(arr.joinToString())
+    }
+
+    @Test
+    fun `1-19`() {
+        fun factorial(n: Int): Int {
+            return if (n == 1 || n == 0) {
+                1
+            } else {
+                n * factorial(n - 1)
+            }
+        }
+    }
+
+    @Test
+    fun `1-20`() {
+        fun factorial(n: Int): Int {
+            var f = 1
+            for (i in 2..n) {
+                f *= i
+            }
+
+            return f
+        }
+
+        println(factorial(4))
+    }
 }
