@@ -265,6 +265,28 @@ internal class Ch1 {
     }
 
     @Test
+    fun `Q) 1-3`() {
+        fun printTable(n: Int) {
+            for (i in 1..10) {
+                println("$n * $i = ${n * i}")
+            }
+        }
+
+        println(printTable(10))
+
+        fun printTableRec(n: Int, i: Int) {
+            if (i < 1) {
+                return
+            }
+
+            printTableRec(n, i - 1)
+            println("$n * $i = ${n * i}")
+        }
+
+        println(printTableRec(10, 10))
+    }
+
+    @Test
     fun `1-19`() {
         fun factorial(n: Int): Int {
             return if (n == 1 || n == 0) {
