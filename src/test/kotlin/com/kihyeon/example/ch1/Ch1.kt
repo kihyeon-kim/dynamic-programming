@@ -272,7 +272,7 @@ internal class Ch1 {
             }
         }
 
-        println(printTable(10))
+        printTable(10)
 
         fun printTableRec(n: Int, i: Int) {
             if (i < 1) {
@@ -283,7 +283,7 @@ internal class Ch1 {
             println("$n * $i = ${n * i}")
         }
 
-        println(printTableRec(10, 10))
+        printTableRec(10, 10)
     }
 
     @Test
