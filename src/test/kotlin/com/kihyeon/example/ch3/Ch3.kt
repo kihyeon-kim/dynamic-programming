@@ -55,4 +55,71 @@ internal class Ch3 {
         println(minCost(3))
     }
 
+    @Test
+    fun `3-3`() {
+        fun maxSubStringLength(str: String): Int {
+            val n = str.length
+            var maxLen = 0
+
+            for (i in 0 until n) {
+                for (j in i + 1 until n step 2) { // 짝수 길이
+                    var len = j - i + 1
+
+                    if (maxLen >= len) {
+                        continue
+                    }
+
+                    var (lSum, rSum) = Pair(0, 0)
+                    for (k in 0 until len / 2) {
+                        lSum += str[i + k].toInt()
+                        rSum += str[i + k + len / 2].toInt()
+                    }
+
+                    if (lSum == rSum) {
+                        maxLen = len
+                    }
+                }
+            }
+
+            return maxLen
+        }
+
+        println(maxSubStringLength("142124"))
+        println(maxSubStringLength("9430723"))
+    }
+
+    @Test
+    fun `3-4`() {
+        fun maxSubStringLength(str: String): Int {
+            val n = str.length
+            var maxLen = 0
+
+            val sum = (0..n).map { arrayOfNulls<Int>(n) }.toTypedArray()
+
+            for (i in 0 until n) {
+                sum[i][i] = str[i].toInt()
+            }
+
+            for (len in 2..n) {
+                for (i in 0 until n - len + 1) { // 6 - 2 + 1
+                    val j = i + len - 1
+                    val k = len / 2
+
+                    // 4, 5 = 4, 4 + 5, 5
+                    // 2, 3 = 2, 2 + 3, 3
+                    sum[i][j] = sum[i][j - k]!! + sum[j - k + 1][j]!! // 짝수 상관없이 부분 합 계산. i .. k .. j
+
+                    if (len % 2 == 0 && sum[i][j - k] == sum[j - k + 1][j] && len > maxLen) {
+                        maxLen = len
+                    }
+                }
+            }
+
+            return maxLen
+        }
+
+        println(maxSubStringLength("142124"))
+        println(maxSubStringLength("9430723"))
+    }
+
 }
