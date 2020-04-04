@@ -122,4 +122,76 @@ internal class Ch3 {
         println(maxSubStringLength("9430723"))
     }
 
+    @Test
+    fun `3-5`() {
+        // 하향식
+        fun factorial(n: Int): Int {
+            if (n == 1 || n == 0) {
+                return 1
+            }
+
+            return n * factorial(n - 1)
+        }
+    }
+
+    @Test
+    fun `3-6`() {
+        // 상향식
+        fun factorial(n: Int): Int {
+            var f = 1
+
+            for (i in 2..n) {
+                f *= i
+            }
+
+            return f
+        }
+
+        println(factorial(4))
+    }
+
+    @Test
+    fun `3-7`() {
+        class Node(
+            val left: Node?,
+            var data: Int,
+            val right: Node?
+        )
+
+        fun addChildSum(root: Node?) {
+            if (root == null)
+                return
+
+            addChildSum(root.left)
+
+            addChildSum(root.right)
+
+            var finalSum = root.data
+
+            if (root.left != null) {
+                finalSum += root.left.data
+            }
+
+            if (root.right != null) {
+                finalSum += root.right.data
+            }
+
+            root.data = finalSum
+        }
+    }
+
+    @Test
+    fun `3-8`() {
+        // 수학 조합 설명: https://m.blog.naver.com/2gumin14/221350308142
+        fun combination(n: Int, m: Int): Int {
+            return if (n == 0 || m == 0 || n == m) {
+                1
+            } else {
+                // 첫번째 선택하고 나머지 n - 1 에서 m - 1 개를 선택하는경우 +
+                // 첫번째를 선택하지 않는 경우 n - 1 에서 m 개를 선택하는경우
+                combination(n - 1, m - 1) + combination(n - 1, m)
+            }
+        }
+    }
+
 }
